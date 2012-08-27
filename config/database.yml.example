@@ -1,0 +1,11 @@
+development: 
+  adapter: postgresql
+  database: whereisryanbigg_development
+  username: wiseleyb
+  host: /tmp
+
+test: 
+  adapter: postgresql
+  database: whereisryanbigg_test
+  username: wiseleyb
+  host: /tmp

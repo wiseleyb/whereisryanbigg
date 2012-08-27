@@ -1,0 +1,36 @@
+<% @tweet = Ryan.with_location.last.ryan_location %>
+<h1><%= @tweet.full_name%>, <%=@tweet.country %></h1>
+
+<% @json = RyanLocation.all.to_gmaps4rails %>
+<% # @json = RyanLocation.all.collect {|r| r.polygon_to_hash_arr}.to_json %>
+<% # @json = RyanLocation.all.collect {|r| r.polygon_to_lat_lng}.to_json %>
+<% # gmaps4rails(@json) %>
+
+<% # gmaps("map_options" => { "detect_location" => false, "center_on_user" => false, "auto_zoom" => false, "zoom" => 3},"markers" => { "data" => @json }) %>
+
+<%= gmaps("map_options" => { "detect_location" => false, "center_on_user" => false, 
+		"auto_zoom" => false, "zoom" => 2},"markers" => { "data" => @json }) %>
+
+<div class="row-fluid">
+  <div class="span12">
+    <h2>Based on location data from <%=Ryan.count%> Ryan Bigg tweets</h2>
+		<div class="row-fluid">
+		  <div class="span6">
+		  	<h3>Last 100 Tweets</h3>
+			  <ul>
+					<% Ryan.limit(100).each do |tweet| %>
+						<li><%=link_to tweet.tweet, "https://twitter.com/ryanbigg/status/#{tweet.tweet_id}", :target => "_ryantweet" %></li>
+					<% end %>
+				</ul>
+			</div>
+		  <div class="span6">
+		  	<h3>Locations</h3>
+		  	<ul>
+		  		<% RyanLocation.all.each do |loc| %>
+		  			<li><%=loc.full_name%></li>
+		  		<% end %>
+		  	</ul>
+		  </div>
+		</div>
+	</div>
+</div>
