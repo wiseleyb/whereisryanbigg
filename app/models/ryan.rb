@@ -23,6 +23,10 @@ class Ryan < ActiveRecord::Base
 	  end
   end
 
+  def self.last_location
+    Ryan.with_location.first.ryan_location
+  end
+  
 end
 
 

@@ -43,4 +43,8 @@ class RyanLocation < ActiveRecord::Base
     "#{self.full_name}"
   end
 
+  def to_s
+    "#{self.full_name}, #{self.country}"
+  end
+
 end
