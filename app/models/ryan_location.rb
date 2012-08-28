@@ -5,6 +5,8 @@ class RyanLocation < ActiveRecord::Base
 
   has_many :ryans
 
+  default_scope :order => 'updated_at desc'
+
   def self.from_tweet(tweet)
     unless tweet.place.nil?
       rl = RyanLocation.find_or_create_by_tweet_place_id(tweet.place.id)
