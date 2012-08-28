@@ -45,6 +45,24 @@ class RyanLocation < ActiveRecord::Base
     "#{self.full_name}"
   end
 
+  def gmaps4rails_title
+    "Tweets from #{self.to_s}"
+  end
+
+  def gmaps4rails_infowindow
+    "<p><b>Last 10 tweets from #{self.to_s}</b></p><ul>" +
+    self.ryans.limit(10).collect {|r| "<li>#{r.tweet}</li>" }.join +
+    "</ul>"
+  end
+
+  # def gmaps4rails_marker_picture
+  #   {
+  #     "picture" => "/assets/superman.png", 
+  #     "width" =>  20,
+  #     "height" => 20
+  #   }
+  # end
+
   def to_s
     "#{self.full_name}, #{self.country}"
   end

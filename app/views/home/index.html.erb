@@ -1,7 +1,12 @@
 <h1><%= Ryan.last_location.to_s %></h1>
 
-<%= gmaps("map_options" => { "detect_location" => false, "center_on_user" => false, 
-		"auto_zoom" => false, "zoom" => 2},"markers" => { "data" => RyanLocation.all.to_gmaps4rails }) %>
+<%= gmaps("map_options" => { 
+								"detect_location" => false, 
+								"center_on_user" => false, 
+								"auto_zoom" => false, 
+								"zoom" => 3},
+								# "rich_marker" => true},
+					"markers" => { "data" => RyanLocation.all.to_gmaps4rails }) %>
 
 <div class="row-fluid">
   <div class="span12">
