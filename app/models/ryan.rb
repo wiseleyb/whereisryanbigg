@@ -3,7 +3,7 @@ class Ryan < ActiveRecord::Base
 
   belongs_to :ryan_location
 
-  default_scope :order => 'tweet_date ASC'
+  default_scope :order => 'tweet_date desc'
 
   scope :with_location, where("not ryan_location_id is null")
   

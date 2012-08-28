@@ -1,4 +1,4 @@
-<% @tweet = Ryan.with_location.last.ryan_location %>
+<% @tweet = Ryan.with_location.first.ryan_location %>
 <h1><%= @tweet.full_name%>, <%=@tweet.country %></h1>
 
 <% @json = RyanLocation.all.to_gmaps4rails %>
