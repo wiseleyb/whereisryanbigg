@@ -13,3 +13,5 @@ cp config/database.yml.example config/database.yml
 ... modify database.yml
 bundle exec rake db:nuke
 ```
+
+Site is temporarily up on http://whereisryanbigg.herokuapp.com/
