@@ -46,7 +46,7 @@
           <a class="brand" href="/">Where is Ryan Bigg?</a>
           <div class="container-fluid nav-collapse">
             <ul class="nav">
-                <li><%= link_to "Blog", "http://whereisryanbigg.tumblr.com", :target => "wirbblog"  %></li>
+                <li><%= link_to "Blog", "http://whereisryanbigg.tumblr.com", :target => "wirbblog" %></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -68,13 +68,20 @@
         </div><!--/span-->
         <% end %>
         <div class="span12">
+          <%= render 'shared/flash_messages' %>
           <h3>You can help track Ryan.  Tweet with hash tag <%=link_to "#withryanbigg", "https://twitter.com/#!/search/realtime/%23withryanbigg"%> (<%= link_to "with location enabled", "https://support.twitter.com/articles/122236"%>)</h3>
           <%= yield %>
         </div>
       </div><!--/row-->
 
       <footer>
-        <p>&copy; Ryan Bigg Location Services 2012 - <%=link_to "data updated every 15 minutes", "/update_twitter"%> (updates enabled via <%= link_to "StillAlive!", "https://stillalive.com/"%>).  Contributions welcome <%=link_to "https://github.com/wiseleyb/whereisryanbigg", "https://github.com/wiseleyb/whereisryanbigg"%></p>
+        <p>&copy; Ryan Bigg Location Services 2012 - <%=link_to "data updated every 15 minutes", "/update_twitter"%> (updates enabled via <%= link_to "StillAlive!", "https://stillalive.com/"%>) | Contributions welcome <%=link_to "https://github.com/wiseleyb/whereisryanbigg", "https://github.com/wiseleyb/whereisryanbigg"%> | 
+          <% if current_user %>
+            <%= link_to "Sign Out #{current_user.email}", "/users/sign_out", :method => :delete %>
+          <% else %>
+            <%=link_to "Sign In", "/users/sign_in"%>
+          <% end %>
+        </p>
       </footer>
 
     </div> <!-- /container -->
