@@ -17,3 +17,27 @@ body { padding-top: 60px; }
 //
 // Example:
 // @linkColor: #ff0000;
+
+img { max-width: none; }
+.title-box h1 { 
+	width:100%;
+	border-bottom: 2px black solid;
+	margin-bottom: 5px;
+}
+
+@media screen and (max-width:778px) {
+
+	.container-fluid, .span12, .span6 {
+		padding: 0;
+		margin: 0;
+		max-width: 100%
+	}
+	h1 {
+		font-size: 15px;
+		line-height: 15px;
+		text-transform: uppercase;
+	}
+	.subsection-info {
+		font-size: 12px;
+	}
+}

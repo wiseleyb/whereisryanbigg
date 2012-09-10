@@ -24,3 +24,15 @@
 }
 
 img { max-width: none; }
+
+@media screen and (max-width:490px) {
+  .gmaps4rails_map {
+    height: 280px;
+  }
+}
+
+@media screen and (max-width:330px) {
+  .gmaps4rails_map {
+    height: 380px;
+  }
+}

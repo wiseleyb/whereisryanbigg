@@ -1,5 +1,4 @@
 <h1><%= Ryan.last_location.to_s %></h1>
-
 <%= gmaps("map_options" => { 
 								"detect_location" => false, 
 								"center_on_user" => false, 
@@ -10,24 +9,32 @@
 
 <div class="row-fluid">
   <div class="span12">
-    <h2>Based on location data from <%=Ryan.count%> Ryan Bigg tweets (and any tweet with <%=link_to "#withryanbigg", "https://twitter.com/#!/search/realtime/%23withryanbigg"%>)</h2>
-		<div class="row-fluid">
-		  <div class="span6">
-		  	<h3>Last 100 Tweets</h3>
-			  <ul>
-					<% Ryan.limit(100).each do |tweet| %>
-						<li><%=link_to tweet.tweet, "https://twitter.com/ryanbigg/status/#{tweet.tweet_id}", :target => "_ryantweet" %></li>
-					<% end %>
-				</ul>
-			</div>
-		  <div class="span6">
-		  	<h3>Locations</h3>
-		  	<ul>
-		  		<% RyanLocation.all.each do |loc| %>
-		  			<li><%=loc.full_name%></li>
-		  		<% end %>
-		  	</ul>
-		  </div>
+    <h2 class="subsection-info">Based on location data from <%=Ryan.count%> Ryan Bigg tweets (and any tweet with <%=link_to "#withryanbigg", "https://twitter.com/#!/search/realtime/%23withryanbigg"%>)</h2>
+
+	  <div class="span6 title-box">
+      <h1>Participate</h1>
+			<p>You can help track Ryan.  
+					Tweet with hash tag <%=link_to "#withryanbigg", "https://twitter.com/#!/search/realtime/%23withryanbigg"%> 
+					(<%= link_to "with location enabled", "https://support.twitter.com/articles/122236"%>)</p>
 		</div>
+
+	  <div class="span6 title-box">
+      <h1>Locations</h1>
+	  	<ul>
+	  		<% RyanLocation.all.each do |loc| %>
+	  			<li><%=loc.full_name%></li>
+	  		<% end %>
+	  	</ul>
+	  </div>
+
+	  <div class="span12 title-box">
+      <h1>Last 100 Tweets</h1>
+		  <ul>
+				<% Ryan.limit(100).each do |tweet| %>
+					<li><%=link_to tweet.tweet, "https://twitter.com/ryanbigg/status/#{tweet.tweet_id}", :target => "_ryantweet" %></li>
+				<% end %>
+			</ul>
+		</div>
+
 	</div>
 </div>
