@@ -8,7 +8,7 @@ class HomeController < ApplicationController
 		tweets = Twitter.user_timeline("ryanbigg", :count => 200)
 		Ryan.from_tweet(tweets)
 		tweets = Twitter.search("#withryanbigg", :count => 200)
-		Ryan.from_tweet(tweets)
+		Ryan.from_tweet(tweets.results)
 		redirect_to root_path
 	end
 
