@@ -14,4 +14,12 @@ cp config/database.yml.example config/database.yml
 bundle exec rake db:nuke
 ```
 
+Currently - when you change assets you need to do a super lame assets:precompile.  Heroku issue... working on it.
+
+```
+RAILS_ENV=production bundle exec rake assets:precompile
+```
+
+
+
 Site is temporarily up on http://whereisryanbigg.herokuapp.com/
