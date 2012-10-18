@@ -38,8 +38,12 @@ class Ryan < ActiveRecord::Base
       rescue Exception => e
         errors << r.id 
         puts e.message
+        if errors.size > 20 
+          puts "bailing - too many errors"
+          return errors
+        end
       end
-      sleep 1
+      sleep 30
     end
     return errors 
   end
