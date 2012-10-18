@@ -9,7 +9,7 @@ class Ryan < ActiveRecord::Base
   
   def self.from_tweet(tweets)
   	tweets = [tweets] unless tweets.is_a?(Array)
-  	tweets.reverse.each do |tweet|
+  	tweets.flatten.reverse.each do |tweet|
       # puts tweet.to_yaml
       unless tweet.nil?
         r = Ryan.find_or_create_by_tweet_id(tweet.id.to_s)

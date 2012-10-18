@@ -8,18 +8,29 @@ class RyanLocation < ActiveRecord::Base
   default_scope :order => 'updated_at desc'
 
   def self.from_tweet(tweet)
-    unless tweet.place.nil?
-      rl = RyanLocation.find_or_create_by_tweet_place_id(tweet.place.id)
-      rl.country = tweet.place.country
-      rl.country_code = tweet.place.country_code
-      rl.full_name = tweet.place.full_name
-      rl.name = tweet.place.name
-      rl.gmaps = true
-      rl.polygon = tweet.place.bounding_box.coordinates
-      ll = rl.polygon_to_lat_lng
-      rl.latitude = ll["lat"]
-      rl.longitude = ll["lng"]
-      rl.save!
+    unless tweet.geo.nil? || tweet.geo.coordinates.empty?
+      lat = tweet.geo.coordinates.first
+      lon = tweet.geo.coordinates.last
+      rl = RyanLocation.where(:latitude => lat, :longitude => lon).first
+      if rl.nil?
+        rl = RyanLocation.new
+        # if tweet.place.nil?
+          geo = Geokit::Geocoders::GoogleGeocoder3.do_reverse_geocode("#{lat},#{lon}")
+          rl.country = geo.country
+          rl.country_code = geo.country_code
+          rl.full_name = geo.full_address
+          rl.name = geo.full_address
+        # else
+        #   rl.country = tweet.place.country
+        #   rl.country_code = tweet.place.country_code
+        #   rl.full_name = tweet.place.full_name
+        #   rl.name = tweet.place.name
+        # end
+        rl.gmaps = true
+        rl.latitude = lat
+        rl.longitude = lon
+        rl.save!
+      end
       return rl
     end
   end
@@ -42,7 +53,8 @@ class RyanLocation < ActiveRecord::Base
 
   def gmaps4rails_address
     #describe how to retrieve the address from your model, if you use directly a db column, you can dry your code, see wiki
-    "#{self.full_name}"
+    # "#{self.full_name}"
+    self.full_name.to_s
   end
 
   def gmaps4rails_title
@@ -64,7 +76,7 @@ class RyanLocation < ActiveRecord::Base
   # end
 
   def to_s
-    "#{self.full_name}, #{self.country}"
+    self.full_name.to_s
   end
 
 end
