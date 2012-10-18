@@ -23,6 +23,27 @@ class Ryan < ActiveRecord::Base
 	  end
   end
 
+  def self.update_locations
+    errors = []
+    RyanLocation.destroy_all
+    icount = 0
+    Ryan.all.each do |r|
+      icount += 1
+      puts "#{icount}: #{r.tweet}"
+      begin
+        tweet = Twitter.status(r.tweet_id)
+        rl = RyanLocation.from_tweet(tweet)
+        r.ryan_location_id = rl.id unless rl.nil?
+        r.save!
+      rescue Exception => e
+        errors << r.id 
+        puts e.message
+      end
+      sleep 1
+    end
+    return errors 
+  end
+
   def self.last_location
     Ryan.with_location.first.ryan_location
   end
