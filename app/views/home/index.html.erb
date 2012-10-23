@@ -26,8 +26,8 @@
   <div class="span6 title-box">
     <h1>Locations</h1>
   	<ul>
-  		<% RyanLocation.all.each do |loc| %>
-  			<li><%=loc.full_name%></li>
+  		<% RyanLocation.all.collect(&:full_name).uniq[0..20].each do |loc| %>
+  			<li><%=loc%></li>
   		<% end %>
   	</ul>
   </div>

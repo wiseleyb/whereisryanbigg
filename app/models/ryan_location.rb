@@ -7,6 +7,11 @@ class RyanLocation < ActiveRecord::Base
 
   default_scope :order => 'updated_at desc'
 
+  def self.latest
+    RyanLocation.all.to_gmaps4rails.uniq[0..20]
+  end
+
+
   def self.from_tweet(tweet)
     unless tweet.geo.nil? || tweet.geo.coordinates.empty?
       lat = tweet.geo.coordinates.first

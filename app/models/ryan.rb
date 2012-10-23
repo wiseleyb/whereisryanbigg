@@ -23,11 +23,11 @@ class Ryan < ActiveRecord::Base
 	  end
   end
 
-  def self.update_locations
+  def self.update_locations(last_id = Ryan.first.id)
+    # RyanLocation.destroy_all
     errors = []
-    RyanLocation.destroy_all
     icount = 0
-    Ryan.all.each do |r|
+    Ryan.where("id < #{last_id}").each do |r|
       icount += 1
       puts "#{icount}: #{r.tweet}"
       begin
