@@ -11,20 +11,33 @@
 
 <div class="row-fluid">
   <div class="span12">
-    <h2>Based on location data from <%=Ryan.count%> Ryan Bigg tweets (and any tweet with <%=link_to "#withryanbigg", "https://twitter.com/#!/search/realtime/%23withryanbigg"%>)</h2>
+    <h4>Based on location data from <%=Ryan.count%> Ryan Bigg tweets (and any tweet with <%=link_to "#withryanbigg", "https://twitter.com/#!/search/realtime/%23withryanbigg"%>)</h4>
+    <p>You can help track Ryan.  
+        Tweet with hash tag <%=link_to "#withryanbigg", "https://twitter.com/#!/search/realtime/%23withryanbigg"%> 
+        (<%= link_to "with location enabled", "https://support.twitter.com/articles/122236"%>)</p>
   </div>
  </div>
 
 <div class="row-fluid">    
   <div class="span6 title-box">
-    <h1>Participate</h1>
-		<p>You can help track Ryan.  
-				Tweet with hash tag <%=link_to "#withryanbigg", "https://twitter.com/#!/search/realtime/%23withryanbigg"%> 
-				(<%= link_to "with location enabled", "https://support.twitter.com/articles/122236"%>)</p>
+    <h1>Recent Tweets</h1>
+    <div class="tweets">
+      <% Ryan.limit(20).each do |tweet| %>
+        <div class="ryan-tweet">
+          <div class="ryan-pic-div">
+            <%=link_to image_tag("superman.png", :width => "48px"), "https://twitter.com/ryanbigg/status/#{tweet.tweet_id}", :target => "_ryantweet" %>
+          </div>
+          <div class="ryan-tweet-div">
+            <%=link_to tweet.tweet, "https://twitter.com/ryanbigg/status/#{tweet.tweet_id}", :target => "_ryantweet" %>
+          </div>
+          <br/>
+        </div>
+      <% end %>
+    </div>
 	</div>
 
   <div class="span6 title-box">
-    <h1>Locations</h1>
+    <h1>Recent Locations</h1>
   	<ul>
   		<% RyanLocation.all.collect(&:full_name).uniq[0..20].each do |loc| %>
   			<li><%=loc%></li>
@@ -33,14 +46,4 @@
   </div>
 </div>
 
-<div class="row-fluid">    
-  <div class="span12 title-box">
-    <h1>Last 100 Tweets</h1>
-	  <ul>
-			<% Ryan.limit(100).each do |tweet| %>
-				<li><%=link_to tweet.tweet, "https://twitter.com/ryanbigg/status/#{tweet.tweet_id}", :target => "_ryantweet" %></li>
-			<% end %>
-		</ul>
-	</div>
-</div>
 
