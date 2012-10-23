@@ -27,7 +27,7 @@ class Ryan < ActiveRecord::Base
     # RyanLocation.destroy_all
     errors = []
     icount = 0
-    Ryan.where("id < #{last_id}").each do |r|
+    Ryan.unscoped.where("id < #{last_id}").each do |r|
       icount += 1
       puts "#{icount}: #{r.tweet}"
       begin
